@@ -27,22 +27,26 @@ const getProduct = async (req, res) => {
 
 // create/add a new product
 const createProduct = async (req, res) => {
-  const { name, price, releaseYear, images } = req.body;
+  const { name, description, price, stockLevel, images } = req.body;
 
   const emptyFields = [];
 
   if (!name) {
     emptyFields.push("name");
   }
+  if (!description) {
+    emptyFields.push("name");
+  }
   if (!price) {
     emptyFields.push("price");
   }
-  if (!releaseYear) {
+  if (!stockLevel) {
     emptyFields.push("releaseYear");
   }
   if (!images) {
     emptyFields.push("images");
   }
+  console.log(emptyFields);
   if (emptyFields.length > 0) {
     return res
       .status(404)
@@ -51,7 +55,13 @@ const createProduct = async (req, res) => {
 
   // add document to DB
   try {
-    const product = await Product.create({ name, price, releaseYear, images });
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      stockLevel,
+      images,
+    });
     res.status(200).json(product);
   } catch (error) {
     res.status(404).json({ err: error });

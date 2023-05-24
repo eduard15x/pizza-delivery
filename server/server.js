@@ -7,6 +7,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 // routes import
+const productsRoute = require("./routes/products");
 // const usersRoute = require("./routes/users");
 
 // create express app
@@ -20,6 +21,9 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+// routes
+app.use("/menu", productsRoute);
 
 // connection to mongodb
 mongoose

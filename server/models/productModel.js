@@ -16,18 +16,24 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    stockLevel: {
+      type: Number,
+      required: true,
+    },
     images: [
       {
         base64: {
           type: String,
+          required: true,
         },
         name: {
           type: String,
+          required: true,
         },
         lastModified: {
           type: Number,
+          required: true,
         },
-        required: true,
       },
     ],
     extraAliments: {

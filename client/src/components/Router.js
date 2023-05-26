@@ -6,6 +6,14 @@ import Footer from "./Footer";
 import Home from "../pages/Home";
 import AdminPanel from "../pages/AdminPanel";
 import Contact from "../pages/Contact";
+import Test from "../pages/test";
+import Dash from "../components/Dash";
+import NavBar from "./NavBar";
+import AdminSideNavigation from "./admin/AdminSideNavigation";
+import AdminOffers from "./admin/AdminOffers";
+import AdminSiteContent from "./admin/AdminSiteContent";
+import AdminCatalog from "./admin/AdminCatalog";
+import AdminDashboard from "./admin/AdminDashboard";
 
 const Router = () => {
   const Layout = () => {
@@ -18,15 +26,30 @@ const Router = () => {
     );
   };
 
+  const LayoutAdminPanel = () => {
+    return (
+      <>
+        <NavBar pageTitle="Admin Panel" />
+        <AdminSideNavigation />
+        <Outlet />
+      </>
+    );
+  };
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={Layout}>
-          <Route path="/" Component={Home} />
-          <Route path="/contact" Component={Contact} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/contact" element={<Contact />} />
         </Route>
-        <Route>
-          <Route path="/admin" Component={AdminPanel} />
+
+        <Route path="/admin" element={<LayoutAdminPanel />}>
+          <Route path="" element={<AdminPanel />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="catalog" element={<AdminCatalog />} />
+          <Route path="site-content" element={<AdminSiteContent />} />
+          <Route path="offers" element={<AdminOffers />} />
         </Route>
       </Routes>
     </BrowserRouter>

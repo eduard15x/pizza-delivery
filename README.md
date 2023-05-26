@@ -17,6 +17,7 @@ create 2 different folder in the root directory: `client` & `server`
 -> `OPTIONAL` we will use SCSS to design application -> npm install sass (changes .css -> .scss extension)
 -> `ROUTING` import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom" - check Router.js file in components
 -> `axios` also optional, package for fetching data in a shorter hand
+-> `ICONS` npm install react-icons
 
 ## cd server
 

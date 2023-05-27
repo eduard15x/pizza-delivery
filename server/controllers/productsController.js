@@ -27,7 +27,7 @@ const getProduct = async (req, res) => {
 
 // create/add a new product
 const createProduct = async (req, res) => {
-  const { name, description, price, stockLevel, images } = req.body;
+  const { name, description, price, stockLevel, image } = req.body;
 
   const emptyFields = [];
 
@@ -43,8 +43,8 @@ const createProduct = async (req, res) => {
   if (!stockLevel) {
     emptyFields.push("releaseYear");
   }
-  if (!images) {
-    emptyFields.push("images");
+  if (!image) {
+    emptyFields.push("image");
   }
   console.log(emptyFields);
   if (emptyFields.length > 0) {
@@ -60,7 +60,7 @@ const createProduct = async (req, res) => {
       description,
       price,
       stockLevel,
-      images,
+      image,
     });
     res.status(200).json(product);
   } catch (error) {

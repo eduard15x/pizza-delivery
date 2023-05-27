@@ -87,7 +87,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0px 16px;
+      margin: 0px 16px;
       font-weight: bold;
       font-size: 16px;
       margin-bottom: 8px;
@@ -114,7 +114,8 @@
       }
 
       &--image {
-        width: 15%;
+        width: 110px;
+        padding-left: 8px;
       }
 
       &--settings {
@@ -128,7 +129,7 @@
       justify-content: space-between;
       align-items: center;
       margin: 0px 16px;
-      height: 60px;
+      height: 70px;
       border-bottom: 1px solid #ebebeb;
 
       &:hover {
@@ -145,7 +146,7 @@
         display: flex;
         align-items: center;
         margin-right: 10px;
-        height: 60px;
+        height: 70px;
 
         &:last-child {
           border-right: none;
@@ -167,8 +168,12 @@
         width: 10%;
       }
 
-      &--images {
-        width: 15%;
+      &--image {
+        width: 70px;
+        height: 70px;
+        margin-right: 40px;
+        padding: 5px;
+        border: 1px solid #ebebeb;
       }
 
       &--icon {

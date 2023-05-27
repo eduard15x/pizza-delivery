@@ -5,6 +5,7 @@ const MONGODB = process.env.MONGODB_CONNECTION;
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // routes import
 const productsRoute = require("./routes/products");
@@ -13,6 +14,9 @@ const productsRoute = require("./routes/products");
 // create express app
 const app = express();
 app.use(cors());
+// Increase the maximum payload size to 50MB
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // middleware
 app.use(express.json());

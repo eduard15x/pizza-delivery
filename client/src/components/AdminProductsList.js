@@ -24,10 +24,11 @@ const AdminProductsList = ({ productsArray, removeIcon, modifyIcon }) => {
               </p>
               <p className="products-list__item--price">{item.price}</p>
               <p className="products-list__item--stock">{item.stockLevel}</p>
-              <p className="products-list__item--images">
-                {item.images.base64}
-                IMAGE
-              </p>
+              <img
+                className="products-list__item--image"
+                src={item.image}
+                alt={item.name}
+              />
               {removeIcon}
               {modifyIcon}
             </li>

@@ -1,10 +1,14 @@
+import { useState } from "react";
+
 const AdminProductForm = ({
   className,
   newProduct,
   handleSubmit,
   updateNewProduct,
   formTitle,
+  handleAddFiles,
 }) => {
+  console.log(newProduct?.image);
   return (
     <form
       onSubmit={(e) => handleSubmit(e, newProduct?._id)}
@@ -57,17 +61,13 @@ const AdminProductForm = ({
         type="file"
         name="images"
         className={`${className}--input`}
-        defaultValue=""
-        onChange={(e) =>
-          updateNewProduct("images", [
-            {
-              base64: "imageSRC",
-              name: "imageNAME",
-              lastModified: 3131,
-            },
-          ])
-        }
+        onChange={handleAddFiles}
       />
+      {newProduct?.image === "" || newProduct?.image === undefined ? (
+        ""
+      ) : (
+        <img width={100} height={100} alt="imgg" src={newProduct?.image} />
+      )}
       <input type="submit" value="Save" className={`${className}--submit`} />
     </form>
   );

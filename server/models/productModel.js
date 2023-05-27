@@ -20,22 +20,10 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    images: [
-      {
-        base64: {
-          type: String,
-          required: true,
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        lastModified: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
+    image: {
+      type: String,
+      required: true,
+    },
     extraAliments: {
       type: String,
     },

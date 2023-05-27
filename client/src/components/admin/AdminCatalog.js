@@ -30,7 +30,7 @@ const AdminCatalog = () => {
   }
 
   // update the state newProduct variable when edit form to add a new product
-  function updateNewProduct(property, value) {
+  function updateNewProduct(property, value, e) {
     setNewProduct({
       ...newProduct,
       [property]: value,
@@ -89,6 +89,27 @@ const AdminCatalog = () => {
     }
   }
 
+  const handleAddFiles = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+
+    if (file) {
+      const reader = new FileReader();
+      console.log(reader);
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64string = reader.result;
+        console.log(reader.result);
+
+        setNewProduct({
+          ...newProduct,
+          image: base64string,
+        });
+      };
+      console.log(newProduct);
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -123,6 +144,7 @@ const AdminCatalog = () => {
             newProduct={newProduct}
             handleSubmit={handleSubmitUpdate}
             updateNewProduct={updateNewProduct}
+            handleAddFiles={handleAddFiles}
           />
         }
         setShowModal={setShowModal}
@@ -134,6 +156,7 @@ const AdminCatalog = () => {
         formTitle="Add a new product"
         handleSubmit={handleSubmit}
         updateNewProduct={updateNewProduct}
+        handleAddFiles={handleAddFiles}
       />
     </div>
   );

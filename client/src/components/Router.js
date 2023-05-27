@@ -29,7 +29,10 @@ const Router = () => {
   const LayoutAdminPanel = () => {
     return (
       <>
-        <NavBar pageTitle="Admin Panel" />
+        <NavBar
+          className="admin-panel admin-panel__nav-bar"
+          pageTitle="Admin Panel"
+        />
         <AdminSideNavigation />
         <Outlet />
       </>

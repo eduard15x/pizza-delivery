@@ -83,6 +83,7 @@ const AdminCatalog = () => {
       const response = await axios.patch(updateProductURL + id, newProduct);
       console.log("Response:", response.data);
       getProducts();
+      setShowModal(false);
     } catch (error) {
       console.error("Error:", error);
     }

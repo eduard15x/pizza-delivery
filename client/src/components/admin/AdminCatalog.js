@@ -93,12 +93,23 @@ const AdminCatalog = () => {
   }, []);
 
   return (
-    <div className="admin-panel__page">
+    <div className="admin-panel__page admin-catalog">
+      <h1 className="admin-catalog--title">Admin - Catalog</h1>
       {/* Admin Products List component */}
       <AdminProductsList
         productsArray={productsList}
-        removeIcon={<GoTrashcan onClick={handleDelete} />}
-        modifyIcon={<GoTools onClick={handleUpdate} />}
+        removeIcon={
+          <GoTrashcan
+            onClick={handleDelete}
+            className="products-list__item--icon"
+          />
+        }
+        modifyIcon={
+          <GoTools
+            onClick={handleUpdate}
+            className="products-list__item--icon"
+          />
+        }
       />
 
       {/* Admin Update Product Modal Form */}
@@ -107,6 +118,7 @@ const AdminCatalog = () => {
         modalTitle="Update product"
         component={
           <AdminProductForm
+            className="form-update-product"
             newProduct={newProduct}
             handleSubmit={handleSubmitUpdate}
             updateNewProduct={updateNewProduct}
@@ -117,6 +129,7 @@ const AdminCatalog = () => {
 
       {/* Admin New Product Form */}
       <AdminProductForm
+        className="form-add-product"
         formTitle="Add a new product"
         handleSubmit={handleSubmit}
         updateNewProduct={updateNewProduct}

@@ -91,22 +91,18 @@ const AdminCatalog = () => {
 
   const handleAddFiles = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     if (file) {
       const reader = new FileReader();
-      console.log(reader);
       reader.readAsDataURL(file);
       reader.onload = () => {
         const base64string = reader.result;
-        console.log(reader.result);
 
         setNewProduct({
           ...newProduct,
           image: base64string,
         });
       };
-      console.log(newProduct);
     }
   };
 

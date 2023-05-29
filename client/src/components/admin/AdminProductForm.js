@@ -6,7 +6,6 @@ const AdminProductForm = ({
   formTitle,
   handleAddFiles,
 }) => {
-  console.log(newProduct?.image);
   return (
     <form
       onSubmit={(e) => handleSubmit(e, newProduct?._id)}

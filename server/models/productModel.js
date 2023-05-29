@@ -30,5 +30,5 @@ const productSchema = new Schema(
   },
   { timestamps: true }
 ); // when u try to create a new document it automatically it creates that createdAt prop for us
-
+productSchema.index({ name: 1 });
 module.exports = mongoose.model("Product", productSchema);

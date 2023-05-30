@@ -39,7 +39,7 @@ function NavBar() {
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "orange",
+        backgroundColor: "#af6408",
       }}
     >
       <Container maxWidth="xl">
@@ -48,8 +48,6 @@ function NavBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -123,7 +121,7 @@ function NavBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, mx: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>

@@ -11,14 +11,15 @@ export default function ImgMediaCard() {
       style={{
         display: "flex",
         justifyContent: "center",
+        flexWrap: "wrap",
         marginTop: "100px",
       }}
     >
       <Card
         sx={{
-          maxWidth: 500,
-          minWidth: 500,
-          mr: 4,
+          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 550 },
+          minWidth: { xs: 320, sm: 550, md: 425, lg: 550 },
+          m: { xs: 2, md: 1, lg: 3 },
           py: 3,
           px: 2,
           borderRadius: "16px",
@@ -34,9 +35,11 @@ export default function ImgMediaCard() {
             gutterBottom
             variant="h3"
             component="div"
-            color="darkslategray"
-            fontSize="40px"
-            fontWeight="bold"
+            sx={{
+              fontSize: { xs: "26px", sm: "38px" },
+              fontWeight: "bold",
+              color: "darkslategray",
+            }}
           >
             About us
           </Typography>
@@ -47,6 +50,7 @@ export default function ImgMediaCard() {
         </CardContent>
         <CardActions>
           <Button
+            href="/about-us"
             size="medium"
             sx={{
               borderRadius: "25px",
@@ -73,9 +77,9 @@ export default function ImgMediaCard() {
       {/* Component 2 */}
       <Card
         sx={{
-          maxWidth: 500,
-          minWidth: 500,
-          ml: 4,
+          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 550 },
+          minWidth: { xs: 320, sm: 550, md: 425, lg: 550 },
+          m: { xs: 2, md: 1, lg: 3 },
           py: 3,
           px: 2,
           borderRadius: "16px",
@@ -91,9 +95,11 @@ export default function ImgMediaCard() {
             gutterBottom
             variant="h3"
             component="div"
-            color="whitesmoke"
-            fontSize="40px"
-            fontWeight="bold"
+            sx={{
+              fontSize: { xs: "26px", sm: "38px" },
+              fontWeight: "bold",
+              color: "whitesmoke",
+            }}
           >
             Our locations
           </Typography>

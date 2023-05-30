@@ -18,6 +18,12 @@ create 2 different folder in the root directory: `client` & `server`
 -> `ROUTING` import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom" - check Router.js file in components
 -> `axios` also optional, package for fetching data in a shorter hand
 -> `ICONS` npm install react-icons
+-> Material UI - npm install @mui/material @emotion/react @emotion/styled
+-> Material UI Icons - npm install @mui/icons-material
+///
+npm install react-responsive-carousel
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 ## cd server
 

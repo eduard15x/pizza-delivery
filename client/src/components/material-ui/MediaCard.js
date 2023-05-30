@@ -5,20 +5,20 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function ImgMediaCard() {
+export default function MediaCard() {
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        marginTop: "100px",
+        marginTop: "50px",
       }}
     >
       <Card
         sx={{
-          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 550 },
-          minWidth: { xs: 320, sm: 550, md: 425, lg: 550 },
+          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 540 },
+          minWidth: { xs: 320, sm: 550, md: 425, lg: 540 },
           m: { xs: 2, md: 1, lg: 3 },
           py: 3,
           px: 2,
@@ -59,14 +59,13 @@ export default function ImgMediaCard() {
               color: "whitesmoke",
               fontWeight: "bold",
               "&:hover": {
-                backgroundColor: "#bce6e6",
-                color: "darkslategray",
-                filter: "brightness(0.8)",
+                backgroundColor: "#3d8383",
+                color: "white",
+                filter: "brightness(1)",
               },
               "&:active": {
                 backgroundColor: "#bce6e6",
                 color: "darkslategray",
-                filter: "brightness(0.65)",
               },
             }}
           >
@@ -77,8 +76,8 @@ export default function ImgMediaCard() {
       {/* Component 2 */}
       <Card
         sx={{
-          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 550 },
-          minWidth: { xs: 320, sm: 550, md: 425, lg: 550 },
+          maxWidth: { xs: "90%", sm: 550, md: 425, lg: 540 },
+          minWidth: { xs: 320, sm: 550, md: 425, lg: 540 },
           m: { xs: 2, md: 1, lg: 3 },
           py: 3,
           px: 2,

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DemoCarousel from "../components/BannerCarousel";
-import RecommendedList from "../components/RecommendedList";
+import RecommendedList from "../components/material-ui/RecommendedList";
 import MediaCard from "../components/material-ui/MediaCard";
 
 const Home = () => {
@@ -9,11 +9,8 @@ const Home = () => {
   return (
     <div>
       <DemoCarousel />
-      {recommendedProducts.length > 0 ? (
-        <RecommendedList recommendedProducts={recommendedProducts} />
-      ) : (
-        ""
-      )}
+      {/* {recommendedProducts.length > 0*/}
+      <RecommendedList title="Recommended products" />
       <MediaCard />
       <p onClick={() => setRecommendedProducts([1, 2])}>hello</p>
     </div>

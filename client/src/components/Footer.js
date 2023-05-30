@@ -39,7 +39,7 @@ export default function Footer() {
               sx={{
                 display: { xs: "flex" },
                 justifyContent: { xs: "center" },
-                alignItems: "center",
+                alignItems: { xs: "center", sm: "flex-start" },
                 flexDirection: { xs: "column" },
               }}
             >

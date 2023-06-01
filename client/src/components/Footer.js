@@ -27,6 +27,9 @@ export default function Footer() {
         sx={{
           backgroundColor: theme.palette.container.backgroundColor,
           p: 6,
+          position: "absolute",
+          width: "100%",
+          bottom: 0,
         }}
       >
         <Container maxWidth="lg">

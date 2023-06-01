@@ -12,6 +12,8 @@ const Contact = () => {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
+        pb: { xs: "475px", sm: "325px" },
+        pt: { xs: "56px", sm: "64px", md: "68px" },
       }}
     >
       <Typography

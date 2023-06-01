@@ -73,18 +73,18 @@ export default function Footer() {
               <Typography variant="body2" color="text.secondary" sx={{ pb: 1 }}>
                 Check the news on social media.
               </Typography>
-              <Link href="https://www.facebook.com/" color="inherit">
-                <Facebook />
+              <Link href="https://www.facebook.com/" color="text.secondary">
+                <Facebook sx={{ width: "32px", height: "32px" }} />
               </Link>
               <Link
                 href="https://www.instagram.com/"
-                color="inherit"
-                sx={{ pl: 1, pr: 1 }}
+                color="text.secondary"
+                sx={{ px: 2 }}
               >
-                <Instagram />
+                <Instagram sx={{ width: "32px", height: "32px" }} />
               </Link>
-              <Link href="https://www.twitter.com/" color="inherit">
-                <Twitter />
+              <Link href="https://www.twitter.com/" color="text.secondary">
+                <Twitter sx={{ width: "32px", height: "32px" }} />
               </Link>
             </Grid>
 

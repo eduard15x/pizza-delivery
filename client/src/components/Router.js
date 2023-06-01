@@ -6,8 +6,9 @@ import Footer from "./Footer";
 import Home from "../pages/Home";
 import AdminPanel from "../pages/AdminPanel";
 import Menu from "../pages/Menu";
-import Product from "../pages/Product";
+import SingleProduct from "../pages/SingleProduct";
 import Contact from "../pages/Contact";
+import AboutUs from "../pages/AboutUs";
 import Test from "../pages/test";
 import Dash from "../components/Dash";
 import NavBar from "./NavBar";
@@ -47,7 +48,8 @@ const Router = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />}></Route>
           <Route path="/menu" element={<Menu />} />
-          <Route path="/menu/:id" element={<Product />} />
+          <Route path="/menu/:id" element={<SingleProduct />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
 

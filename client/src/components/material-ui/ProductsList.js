@@ -94,10 +94,11 @@ export default function ProductsList() {
           spacing={{ xs: 3, sm: 3, md: 4, lg: 5 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {productsArray.map((item) => (
+          {productsArray.map((item, index) => (
             <Grid xs={4} sm={4} md={4} key={item._id}>
               <CardMedia
                 component="img"
+                loading={"lazy"}
                 image={item.image}
                 alt={`Pizza ${item.name} image`}
                 sx={{
@@ -172,7 +173,12 @@ export default function ProductsList() {
         </Grid>
       ) : (
         <Box sx={{ display: "flex" }}>
-          <CircularProgress />
+          <CircularProgress
+            sx={{
+              display: "flex",
+              margin: "auto",
+            }}
+          />
         </Box>
       )}
     </Box>

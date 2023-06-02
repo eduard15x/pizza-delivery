@@ -5,8 +5,21 @@ const mongoose = require("mongoose");
 // get all products
 const getProducts = async (req, res) => {
   // Product.createIndex({ name: 1 });
-  const products = await Product.find({}).sort({ name: 1 }).allowDiskUse(true); // sorted descending
-  res.status(200).json(products);
+  const recommendedProducts = req.query.recommended;
+  let query = {};
+  // If the 'type' query parameter is present, add it to the query object
+  if (recommendedProducts) {
+    query.recommended = Boolean(recommendedProducts);
+  }
+
+  try {
+    const products = await Product.find(query)
+      .sort({ name: 1 })
+      .allowDiskUse(true);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve products" });
+  }
 };
 
 // get single product

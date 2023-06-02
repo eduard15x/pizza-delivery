@@ -114,6 +114,7 @@ export default function StaffList() {
               </Typography>
               <CardMedia
                 component="img"
+                loading="lazy"
                 image={item.img}
                 alt={`${item.name} - image`}
                 sx={{ width: "75%", margin: "auto", borderRadius: "50%" }}

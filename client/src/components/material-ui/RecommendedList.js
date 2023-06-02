@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,7 +13,7 @@ import im1 from "../../assets/products/bascaiola.jpg";
 import im2 from "../../assets/products/capriciossa.jpg";
 import im3 from "../../assets/products/american-hot.jpg";
 
-export default function RecommendedList({ title }) {
+export default function RecommendedList({ recommendedProductsArr }) {
   return (
     <Box
       component="div"
@@ -34,80 +35,84 @@ export default function RecommendedList({ title }) {
           mt: { xs: -5, md: -7 },
         }}
       >
-        {title}
+        Recommended products
       </Typography>
-      <Card
-        sx={{
-          width: "100%",
-          maxWidth: { xs: 240, sm: 265, lg: 350, xl: 430 },
-          mx: { xs: 1, md: 1 },
-          mt: 3,
-        }}
-      >
-        <CardActionArea
+      {recommendedProductsArr?.map((item) => (
+        <Card
+          key={item._id}
           sx={{
-            filter: "brightness(0.75)",
-            "&:hover": {
-              filter: "brightness(1)",
-            },
+            width: "100%",
+            maxWidth: { xs: 240, sm: 265, lg: 350, xl: 430 },
+            mx: { xs: 1, md: 1 },
+            mt: 3,
           }}
         >
-          <CardMedia
-            component="img"
-            image={im1}
-            alt="green iguana"
+          <CardActionArea
             sx={{
-              maxHeight: 260,
-            }}
-          />
-          <CardContent sx={{ pb: 0, pt: 1, px: 3 }}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              fontWeight="bold"
-              component="div"
-              color="#434242"
-              textAlign="center"
-            >
-              Pizza Bascaiola
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions
-          sx={{
-            px: 3,
-            py: 2,
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography
-            variant="p"
-            fontWeight="bold"
-            color="#434242"
-            fontSize="24px"
-          >
-            $15
-          </Typography>
-          <Button
-            size="medium"
-            sx={{
-              backgroundColor: "#af6408",
-              color: "#ffffff",
-              px: 4,
-              borderRadius: "20px",
+              filter: "brightness(0.75)",
               "&:hover": {
-                backgroundColor: "#af6408",
-                filter: "brightness(1.25)",
+                filter: "brightness(1)",
               },
             }}
           >
-            ORDER
-          </Button>
-        </CardActions>
-      </Card>
-      {/* Comp2 */}
-      <Card
+            <CardMedia
+              loading="lazy"
+              component="img"
+              image={item.image}
+              alt="green iguana"
+              sx={{
+                maxHeight: 260,
+              }}
+            />
+            <CardContent sx={{ pb: 0, pt: 1, px: 3 }}>
+              <Typography
+                gutterBottom
+                variant="h6"
+                fontWeight="bold"
+                component="div"
+                color="#434242"
+                textAlign="center"
+              >
+                {`Pizza ${item.name}`}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions
+            sx={{
+              px: 3,
+              py: 2,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              variant="p"
+              fontWeight="bold"
+              color="#434242"
+              fontSize="24px"
+            >
+              {item.price}
+            </Typography>
+            <Button
+              size="medium"
+              sx={{
+                backgroundColor: "#af6408",
+                color: "#ffffff",
+                px: 4,
+                borderRadius: "20px",
+                "&:hover": {
+                  backgroundColor: "#af6408",
+                  filter: "brightness(1.25)",
+                },
+              }}
+            >
+              ORDER
+            </Button>
+          </CardActions>
+        </Card>
+      ))}
+
+      {/* <Card
         sx={{
           width: "100%",
           maxWidth: { xs: 240, sm: 265, lg: 350, xl: 430 },
@@ -176,9 +181,9 @@ export default function RecommendedList({ title }) {
             ORDER
           </Button>
         </CardActions>
-      </Card>
+      </Card> */}
       {/* Comp 3 */}
-      <Card
+      {/* <Card
         sx={{
           width: "100%",
           maxWidth: { xs: 240, sm: 265, lg: 350, xl: 430 },
@@ -247,7 +252,7 @@ export default function RecommendedList({ title }) {
             ORDER
           </Button>
         </CardActions>
-      </Card>
+      </Card> */}
     </Box>
   );
 }

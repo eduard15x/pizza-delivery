@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 // routes import
-const productsRoute = require("./routes/products");
-// const usersRoute = require("./routes/users");
+const productsRoutes = require("./routes/products");
+const usersRoutes = require("./routes/users");
 
 // create express app
 const app = express();
@@ -27,7 +27,8 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("/menu", productsRoute);
+app.use("/menu", productsRoutes);
+app.use("/users", usersRoutes);
 
 // connection to mongodb
 mongoose

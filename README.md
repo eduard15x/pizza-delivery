@@ -35,6 +35,9 @@ import { Carousel } from "react-responsive-carousel";
 -> npm install dotenv
 -> npm install mongoose <!-- will help us work with MongoDB -->
 -> npm install cors <!-- Enable All CORS Requests -->
+-> npm install bcrypt <!-- for hashing passwords -->
+-> npm install validator <!-- validate inputs field -->
+-> npm install jsonwebtoken <!-- create token for passwords if signup/login succesful -->
 
 # MONGO DB
 

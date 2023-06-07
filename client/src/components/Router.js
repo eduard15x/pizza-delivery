@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 // components
 import Header from "./Header";
 import Footer from "./Footer";
@@ -19,8 +25,11 @@ import AdminOffers from "./admin/AdminOffers";
 import AdminSiteContent from "./admin/AdminSiteContent";
 import AdminCatalog from "./admin/AdminCatalog";
 import AdminDashboard from "./admin/AdminDashboard";
+import { useAuthenticationContext } from "../hooks/useAuthenticationContext";
 
 const Router = () => {
+  const { user } = useAuthenticationContext();
+  console.log(user === null);
   const Layout = () => {
     return (
       <>
@@ -51,8 +60,14 @@ const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />}></Route>
             <Route path="/menu" element={<Menu />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<LogIn />} />
+            <Route
+              path="/signup"
+              element={!user ? <SignUp /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <LogIn /> : <Navigate to="/" />}
+            />
             <Route path="/menu/:id" element={<SingleProduct />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />

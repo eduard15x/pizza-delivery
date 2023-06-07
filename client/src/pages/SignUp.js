@@ -1,9 +1,9 @@
 import { Fragment, useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useSignup } from "../hooks/useSignup";
 
 const SignUp = () => {
   // invoke the return states and function from the useSignup hook

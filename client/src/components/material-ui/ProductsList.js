@@ -12,8 +12,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-// image for test
-import im2 from "../../assets/products/capriciossa.jpg";
 const allProductsURL = process.env.REACT_APP_ALL_PRODUCTS;
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -162,7 +160,7 @@ export default function ProductsList() {
                         filter: "brightness(1.25)",
                       },
                     }}
-                    href={`/menu/${item.name}`}
+                    href={`/menu/${item.productUrlRouterName}`}
                   >
                     ORDER
                   </Button>

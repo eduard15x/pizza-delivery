@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import Home from "../pages/Home";
 import AdminPanel from "../pages/AdminPanel";
 import Menu from "../pages/Menu";
+import SignUp from "../pages/SignUp";
+import LogIn from "../pages/LogIn";
 import SingleProduct from "../pages/SingleProduct";
 import Contact from "../pages/Contact";
 import AboutUs from "../pages/AboutUs";
@@ -43,25 +45,29 @@ const Router = () => {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/menu/:id" element={<SingleProduct />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact" element={<Contact />} />
-        </Route>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/menu/:id" element={<SingleProduct />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+          </Route>
 
-        <Route path="/admin" element={<LayoutAdminPanel />}>
-          <Route path="" element={<AdminPanel />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="catalog" element={<AdminCatalog />} />
-          <Route path="site-content" element={<AdminSiteContent />} />
-          <Route path="offers" element={<AdminOffers />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route path="/admin" element={<LayoutAdminPanel />}>
+            <Route path="" element={<AdminPanel />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="catalog" element={<AdminCatalog />} />
+            <Route path="site-content" element={<AdminSiteContent />} />
+            <Route path="offers" element={<AdminOffers />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

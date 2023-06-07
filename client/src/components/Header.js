@@ -1,11 +1,5 @@
-import { Link } from "react-router-dom";
-const Header = () => {
-  return (
-    <div>
-      <p>Hello Guys</p>
-      <p>This is Header</p>
-    </div>
-  );
-};
+import NavBar from "./material-ui/NavBar";
+
+const Header = () => <NavBar />;
 
 export default Header;

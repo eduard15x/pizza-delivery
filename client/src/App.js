@@ -1,11 +1,6 @@
 import Router from "./components/Router";
+import { AuthProvider } from "react-auth-kit"; // uninstall
 
-function App() {
-  return (
-    <div className="test">
-      <Router />
-    </div>
-  );
-}
+const App = () => <Router />;
 
 export default App;

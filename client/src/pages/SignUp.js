@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import { useSignup } from "../hooks/useSignup";
 
 const SignUp = () => {
+  // invoke the return states and function from the useSignup hook
+  const { signup, isLoading, error } = useSignup();
   const [userForm, setUserForm] = useState({
     userName: "",
     email: "",
@@ -15,8 +17,46 @@ const SignUp = () => {
 
   // destructure the object
   const { userName, email, phone, password } = userForm;
-  // we need to invoke the return states and function from the useSignup hook
-  const { signup, isLoading, error } = useSignup();
+
+  // creating an array to be iterate for each input field
+  const inputs = [
+    {
+      label: "Name",
+      required: true,
+      type: "text",
+      name: "userName",
+      placeholder: "Your name",
+      value: userName,
+      onChange: (e) => setUserForm({ ...userForm, userName: e.target.value }),
+    },
+    {
+      label: "Email",
+      required: true,
+      type: "email",
+      name: "email",
+      placeholder: "Your email",
+      value: email,
+      onChange: (e) => setUserForm({ ...userForm, email: e.target.value }),
+    },
+    {
+      label: "Phone",
+      required: true,
+      type: "text",
+      name: "phone",
+      placeholder: "Your phone number",
+      value: phone,
+      onChange: (e) => setUserForm({ ...userForm, phone: e.target.value }),
+    },
+    {
+      label: "Password",
+      required: true,
+      type: "password",
+      name: "password",
+      placeholder: "Your password",
+      value: password,
+      onChange: (e) => setUserForm({ ...userForm, password: e.target.value }),
+    },
+  ];
 
   const handleSubmit = async function (e) {
     e.preventDefault();
@@ -45,88 +85,34 @@ const SignUp = () => {
           fontSize: { xs: "20px", sm: "24px", md: "30px" },
           textAlign: "center",
           fontWeight: "bold",
-          pb: 3,
+          pb: 2,
         }}
       >
         Create an account
       </Typography>
-      <Typography
-        component="label"
-        sx={{
-          fontSize: { xs: "18px", md: "24px" },
-          pb: 0.5,
-        }}
-      >
-        Name
-      </Typography>
-      <TextField
-        required
-        id="outlined-required"
-        type="text"
-        name="userName"
-        placeholder="Your name"
-        value={userName}
-        onChange={(e) => setUserForm({ ...userForm, userName: e.target.value })}
-      />
 
-      <Typography
-        component="label"
-        sx={{
-          fontSize: { xs: "18px", md: "24px" },
-          pt: 1.5,
-          pb: 0.5,
-        }}
-      >
-        Email
-      </Typography>
-      <TextField
-        required
-        id="outlined-required"
-        type="email"
-        name="email"
-        placeholder="Your email"
-        value={email}
-        onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
-      />
-
-      <Typography
-        component="label"
-        sx={{
-          fontSize: { xs: "18px", md: "24px" },
-          pt: 1.5,
-          pb: 0.5,
-        }}
-      >
-        Phone
-      </Typography>
-      <TextField
-        required
-        id="outlined-required"
-        type="text"
-        name="phone"
-        placeholder="Your phone number"
-        value={phone}
-        onChange={(e) => setUserForm({ ...userForm, phone: e.target.value })}
-      />
-      <Typography
-        component="label"
-        sx={{
-          fontSize: { xs: "18px", md: "24px" },
-          pt: 1.5,
-          pb: 0.5,
-        }}
-      >
-        Password
-      </Typography>
-      <TextField
-        required
-        id="outlined-required"
-        type="password"
-        name="password"
-        placeholder="Your password"
-        value={password}
-        onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
-      />
+      {inputs.map((input) => (
+        <Fragment key={input.label}>
+          <Typography
+            component="label"
+            sx={{
+              fontSize: { xs: "18px", md: "24px" },
+              pt: 1.5,
+              pb: 0.5,
+            }}
+          >
+            {input.label}
+          </Typography>
+          <TextField
+            required={input.required}
+            type={input.type}
+            name={input.name}
+            placeholder={input.placeholder}
+            value={input.value}
+            onChange={input.onChange}
+          />
+        </Fragment>
+      ))}
 
       <Button
         disabled={isLoading}

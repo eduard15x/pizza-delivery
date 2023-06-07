@@ -12,12 +12,11 @@ const LogIn = () => {
     password: "",
   });
 
+  // destructure object
   const { email, password } = userForm;
 
   const handleSubmit = async function (e) {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
     await login(email, password);
   };
 

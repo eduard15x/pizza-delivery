@@ -105,7 +105,7 @@ export default function RecommendedList({ recommendedProductsArr }) {
                   filter: "brightness(1.25)",
                 },
               }}
-              href={`/menu/${item.productUrlRouterName}`}
+              href={`/menu/${item._id}`}
             >
               ORDER
             </Button>

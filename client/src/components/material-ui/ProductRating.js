@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import Typography from "@mui/material/Typography";
 
 const labels = {
   0.5: "Useless",
@@ -35,11 +36,12 @@ export default function ProductRating() {
         precision={0.5}
         emptyIcon={<StarIcon style={{ opacity: 0.5 }} fontSize="inherit" />}
       />
-      <Box
+      <Typography
+        component="p"
         sx={{ ml: 1, fontSize: "18px", color: "#6d4009", fontWeight: "bold" }}
       >
         {labels[value]}
-      </Box>
+      </Typography>
     </Box>
   );
 }

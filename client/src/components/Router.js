@@ -29,7 +29,6 @@ import { useAuthenticationContext } from "../hooks/useAuthenticationContext";
 
 const Router = () => {
   const { user } = useAuthenticationContext();
-  console.log(user === null);
   const Layout = () => {
     return (
       <>

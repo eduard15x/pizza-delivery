@@ -23,6 +23,20 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  userOrders: [
+    {
+      name: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      orderDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
 // static signup method

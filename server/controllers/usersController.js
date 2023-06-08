@@ -40,7 +40,30 @@ const signupUser = async (req, res) => {
   }
 };
 
+// update user
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ err: "No user found" });
+  }
+
+  const user = await User.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body, // it includes also the other properties that are not modifies here, else will delete the old ones
+    }
+  );
+
+  if (!user) {
+    return res.status(404).json({ err: "No user found!" });
+  }
+
+  res.status(200).json(user);
+};
+
 module.exports = {
   loginUser,
   signupUser,
+  updateUser,
 };

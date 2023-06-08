@@ -6,6 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PersonIcon from "@mui/icons-material/Person";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -152,7 +155,13 @@ const NavBar = () => {
                 href={page.href}
                 key={index}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  mx: 2,
+                  color: "white",
+                  display: "block",
+                  "&:hover": { filter: "brightness(0.85)" },
+                }}
               >
                 {page.itemName}
               </Button>
@@ -161,13 +170,20 @@ const NavBar = () => {
 
           {user ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
+              <Tooltip title="Open user menu">
+                <PersonIcon
+                  onClick={handleOpenUserMenu}
+                  sx={{
+                    cursor: "pointer",
+                    fontSize: "30px",
+                    mr: 3,
+                    "&:hover": { filter: "brightness(0.85)" },
+                  }}
+                />
               </Tooltip>
+
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "30px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -187,6 +203,7 @@ const NavBar = () => {
                     <Typography
                       component="a"
                       textAlign="center"
+                      href={setting === "Account" ? "/my-account" : null}
                       onClick={setting === "Logout" ? handleLogout : null}
                     >
                       {setting}
@@ -200,19 +217,40 @@ const NavBar = () => {
               <Typography
                 component="a"
                 href="/login"
-                sx={{ textAlign: "center", color: "white", mx: 2 }}
+                sx={{
+                  textAlign: "center",
+                  color: "white",
+                  "&:hover": { filter: "brightness(0.85)" },
+                }}
               >
                 Login
               </Typography>
               <Typography
                 component="a"
                 href="/signup"
-                sx={{ textAlign: "center", color: "white", mx: 2 }}
+                sx={{
+                  textAlign: "center",
+                  color: "white",
+                  mx: 4,
+                  "&:hover": { filter: "brightness(0.85)" },
+                }}
               >
                 Sign up
               </Typography>
             </>
           )}
+
+          <Tooltip title="Navigate to cart">
+            <Typography component="a" href="/cart" sx={{ color: "white" }}>
+              <ShoppingCartIcon
+                sx={{
+                  fontSize: "30px",
+                  cursor: "pointer",
+                  "&:hover": { filter: "brightness(0.85)" },
+                }}
+              />
+            </Typography>
+          </Tooltip>
         </Toolbar>
       </Container>
     </AppBar>

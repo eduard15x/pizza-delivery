@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
 // rating component
 import ProductRating from "./ProductRating";
 const SINGLE_PRODUCT = process.env.REACT_APP_DELETE_PRODUCT;
@@ -17,13 +18,43 @@ const ProductPage = () => {
   const productIngredients = productDetails?.description.split(",");
   const productAllergens = productDetails?.allergens.split(",");
 
-  const [pizzaType, setPizzaType] = useState(10);
+  const [pizzaType, setPizzaType] = useState(0);
 
   const handleChange = (event) => {
     setPizzaType(event.target.value);
-    console.log(pizzaType);
   };
   const productID = window.location.pathname.split("/").pop();
+  console.log(productDetails?.productType);
+
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const newItem = {
+      product: productID,
+      type: pizzaType,
+      quantity: 1,
+    };
+
+    if (cart) {
+      // check if the same product ID and same type already exista, just increasy quantity
+      const existingItemIndex = cart.findIndex(
+        (item) => item.product === productID && item.type === pizzaType
+      );
+
+      if (existingItemIndex !== -1) {
+        // If an existing item is found, update its quantity
+        const updatedCart = [...cart];
+        updatedCart[existingItemIndex].quantity += 1;
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      } else {
+        // If no existing item is found, add the new item to the cart
+        const updatedCart = [...cart, newItem];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      }
+    } else {
+      // If the cart is empty, add the new item to the cart
+      localStorage.setItem("cart", JSON.stringify([newItem]));
+    }
+  };
 
   function getProductDetails() {
     axios
@@ -35,6 +66,7 @@ const ProductPage = () => {
           price: data.price,
           description: data.description,
           image: data.image,
+          productType: data.productType,
           allergens: "classic crust oil, pan, vegetable oil",
         });
       })
@@ -45,7 +77,6 @@ const ProductPage = () => {
     getProductDetails();
   }, []);
 
-  // console.log(productIngredients);
   return (
     <Box
       sx={{
@@ -168,6 +199,7 @@ const ProductPage = () => {
               width: "75%",
               display: "flex",
               justifyContent: "space-around",
+              alignItems: "center",
               pt: 8,
             }}
           >
@@ -180,19 +212,19 @@ const ProductPage = () => {
             >
               <Typography
                 variant="p"
-                sx={{ pb: 3, fontWeight: "bold", fontSize: "22px" }}
+                sx={{ pb: 2, fontWeight: "bold", fontSize: "22px" }}
               >
                 Choose your type
               </Typography>
               <FormControl sx={{ minWidth: 120 }}>
-                <Select
-                  value={pizzaType}
-                  onChange={handleChange}
-                  placeholder="dada"
-                >
-                  <MenuItem value={10}>600 g</MenuItem>
-                  <MenuItem value={20}>1000 g</MenuItem>
-                  <MenuItem value={30}>1500 g</MenuItem>
+                <Select value={pizzaType} onChange={handleChange}>
+                  {productDetails.productType.length > 0
+                    ? productDetails.productType.map((item) => (
+                        <MenuItem key={item.type} value={item.price}>
+                          {item.type}
+                        </MenuItem>
+                      ))
+                    : null}
                 </Select>
               </FormControl>
             </Box>
@@ -213,9 +245,26 @@ const ProductPage = () => {
                   fontSize: "30px",
                 }}
               >
-                $20
+                {`$${productDetails?.price + pizzaType}`}
               </Typography>
             </Box>
+
+            <Button
+              onClick={handleAddToCart}
+              sx={{
+                maxHeight: "50px",
+                backgroundColor: "#af6408",
+                color: "#ffffff",
+                px: 5,
+                borderRadius: "9999px",
+                "&:hover": {
+                  backgroundColor: "#af6408",
+                  filter: "brightness(1.25)",
+                },
+              }}
+            >
+              Add to cart
+            </Button>
           </Box>
 
           {/* COMPONENT PEOPLE REVIEWS */}

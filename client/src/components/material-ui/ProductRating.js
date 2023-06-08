@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
@@ -17,7 +16,7 @@ const labels = {
   5: "Excellent+",
 };
 
-export default function ProductRating() {
+const ProductRating = () => {
   const value = 3.5;
 
   return (
@@ -44,4 +43,6 @@ export default function ProductRating() {
       </Typography>
     </Box>
   );
-}
+};
+
+export default ProductRating;

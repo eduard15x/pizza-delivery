@@ -35,7 +35,7 @@ const pages = [
 ];
 const settings = ["Account", "Logout"];
 
-function NavBar() {
+const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -217,5 +217,5 @@ function NavBar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default NavBar;

@@ -11,7 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ProductRating from "./ProductRating";
 const SINGLE_PRODUCT = process.env.REACT_APP_DELETE_PRODUCT;
 
-export default function ProductPage() {
+const ProductPage = () => {
   const [productDetails, setProductDetails] = useState(null);
 
   const productIngredients = productDetails?.description.split(",");
@@ -244,4 +244,6 @@ export default function ProductPage() {
       )}
     </Box>
   );
-}
+};
+
+export default ProductPage;

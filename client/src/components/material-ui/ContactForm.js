@@ -1,10 +1,9 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export default function ContactForm() {
+const ContactForm = () => {
   return (
     <Box
       component="form"
@@ -24,11 +23,13 @@ export default function ContactForm() {
       }}
     >
       <input type="hidden" name="_subject" value="Email from Pizza Eduardo" />
+
       <input
         type="hidden"
         name="_next"
         value="https://www.youtube.com/watch?v=vN4Vc9T8QQc&ab_channel=Hollts"
       />
+
       <Typography
         component="p"
         sx={{
@@ -40,6 +41,7 @@ export default function ContactForm() {
       >
         Get in touch with us
       </Typography>
+
       <Typography
         component="label"
         sx={{
@@ -55,6 +57,7 @@ export default function ContactForm() {
         name="name"
         placeholder="Your name"
       />
+
       <Typography
         component="label"
         sx={{
@@ -72,6 +75,7 @@ export default function ContactForm() {
         name="email"
         placeholder="example@yahoo.com"
       />
+
       <Typography
         component="label"
         sx={{
@@ -90,6 +94,7 @@ export default function ContactForm() {
         inputProps={{ maxLength: 150 }}
         placeholder="Write your message..."
       />
+
       <Button
         variant="contained"
         type="submit"
@@ -110,4 +115,6 @@ export default function ContactForm() {
       </Button>
     </Box>
   );
-}
+};
+
+export default ContactForm;

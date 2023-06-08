@@ -1,4 +1,3 @@
-import * as React from "react";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -49,7 +48,7 @@ const staffArray = [
   },
 ];
 
-export default function StaffList() {
+const StaffList = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography
@@ -125,4 +124,6 @@ export default function StaffList() {
       </Grid>
     </Box>
   );
-}
+};
+
+export default StaffList;

@@ -1,9 +1,8 @@
-import * as React from "react";
 import { Fragment } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export default function ContactInfo() {
+const ContactInfo = () => {
   const contactInfo = [
     {
       name: "Phone",
@@ -70,4 +69,5 @@ export default function ContactInfo() {
       </Box>
     </Box>
   );
-}
+};
+export default ContactInfo;

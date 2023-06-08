@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProductsList() {
+const ProductsList = () => {
   const [productsArray, setProductsArray] = useState([]);
   const [age, setAge] = useState("");
 
@@ -181,4 +181,6 @@ export default function ProductsList() {
       )}
     </Box>
   );
-}
+};
+
+export default ProductsList;

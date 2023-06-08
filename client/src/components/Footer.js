@@ -19,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-export default function Footer() {
+const Footer = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -114,4 +114,5 @@ export default function Footer() {
       </Box>
     </ThemeProvider>
   );
-}
+};
+export default Footer;

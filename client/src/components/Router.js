@@ -17,6 +17,8 @@ import LogIn from "../pages/LogIn";
 import SingleProduct from "../pages/SingleProduct";
 import Contact from "../pages/Contact";
 import AboutUs from "../pages/AboutUs";
+import Cart from "../pages/Cart";
+import MyAccount from "../pages/MyAccount";
 import Test from "../pages/test";
 import Dash from "../components/Dash";
 import NavBar from "./NavBar";
@@ -70,6 +72,8 @@ const Router = () => {
             <Route path="/menu/:id" element={<SingleProduct />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/my-account" element={<MyAccount />} />
           </Route>
 
           <Route path="/admin" element={<LayoutAdminPanel />}>

@@ -1,3 +1,4 @@
+// TODO - after added product to localStorage, update the database stock
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";

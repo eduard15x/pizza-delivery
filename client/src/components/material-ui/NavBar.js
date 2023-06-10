@@ -1,4 +1,5 @@
-import * as React from "react";
+// TODO - create global state for cart length products icon in navbar
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -39,8 +40,10 @@ const pages = [
 const settings = ["Account", "Logout"];
 
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const length = JSON.parse(localStorage.getItem("cart")).length;
+  const [it, setIt] = useState(length);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -240,17 +243,43 @@ const NavBar = () => {
             </>
           )}
 
-          <Tooltip title="Navigate to cart">
-            <Typography component="a" href="/cart" sx={{ color: "white" }}>
-              <ShoppingCartIcon
-                sx={{
-                  fontSize: "30px",
-                  cursor: "pointer",
-                  "&:hover": { filter: "brightness(0.85)" },
-                }}
-              />
+          <Box sx={{ position: "relative" }}>
+            <Tooltip title="Navigate to cart">
+              <Typography
+                component="a"
+                href="/cart"
+                sx={{ color: "whitesmoke" }}
+              >
+                <ShoppingCartIcon
+                  sx={{
+                    fontSize: "30px",
+                    cursor: "pointer",
+                    "&:hover": { filter: "brightness(0.85)" },
+                  }}
+                />
+              </Typography>
+            </Tooltip>
+            <Typography
+              component="span"
+              sx={{
+                position: "absolute",
+                top: "-8px",
+                right: "-12px",
+                fontSize: "10px",
+                color: "white",
+                border: "2px solid white",
+                borderRadius: "50%",
+                width: "10px",
+                height: "10px",
+                p: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {it}
             </Typography>
-          </Tooltip>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

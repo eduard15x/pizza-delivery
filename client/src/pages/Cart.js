@@ -1,8 +1,10 @@
+// TODO - Responsive design
+// TODO - submit payment
+// TODO - update DB
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
@@ -11,12 +13,12 @@ const getSingleProductURL = process.env.REACT_APP_SINGLE_PRODUCT;
 
 const Cart = () => {
   const [cartProductsList, setCartProductsList] = useState([]);
+  const [deliveryTax, setDeliveryTax] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
 
   const cartLocalStorage = JSON.parse(localStorage.getItem("cart"));
   const userLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-  console.log(cartLocalStorage);
-  // console.log(userLocalStorage);
   function getCartProducts() {
     if (cartLocalStorage) {
       const promises = cartLocalStorage.map((obj) =>
@@ -25,18 +27,47 @@ const Cart = () => {
 
       Promise.all(promises)
         .then((responses) => {
-          console.log(responses);
           const products = responses.map((response) => response.data);
-          console.log(products);
           setCartProductsList(products);
+          // get subtotal
+          const subtotalPrices = products.map(
+            (item, index) =>
+              (item.price + cartLocalStorage[index].type) *
+              cartLocalStorage[index].quantity
+          );
+          const subtotalSum = subtotalPrices.reduce(
+            (prev, curr) => prev + curr,
+            0
+          );
+          setSubtotal(subtotalSum);
+          // get delivery
+          if (subtotalSum < 40) {
+            setDeliveryTax(8);
+          } else {
+            setDeliveryTax(0);
+          }
         })
         .catch((err) => console.log(err));
     }
   }
 
+  const handleDelete = (e) => {
+    const parentEl = e.currentTarget.parentElement;
+    const productId = parentEl.dataset.productId;
+    const productType = Number(parentEl.dataset.productType);
+    // get index of current clicked item
+    const indexToRemove = cartLocalStorage.findIndex(
+      (item) => item.product === productId && item.type === productType
+    );
+    cartLocalStorage.splice(indexToRemove, 1);
+    // update local storage to store new array
+    localStorage.setItem("cart", JSON.stringify(cartLocalStorage));
+    // update UI
+    getCartProducts();
+  };
+
   useEffect(() => {
     getCartProducts();
-    console.log(cartProductsList);
   }, []);
 
   return (
@@ -74,7 +105,7 @@ const Cart = () => {
             <Box
               component="ul"
               sx={{
-                border: "1px solid lightblue",
+                border: "1px solid lightgray",
                 p: 2,
               }}
             >
@@ -82,7 +113,7 @@ const Cart = () => {
                 component="p"
                 sx={{
                   display: "flex",
-                  borderBottom: "1px solid blue",
+                  borderBottom: "2px solid #393939",
                   pb: 1,
                 }}
               >
@@ -97,7 +128,7 @@ const Cart = () => {
                 <Typography
                   component="span"
                   sx={{
-                    width: "120px",
+                    width: "110px",
                     mr: 4,
                     fontWeight: "bold",
                   }}
@@ -137,7 +168,8 @@ const Cart = () => {
                 <Typography
                   component="span"
                   sx={{
-                    width: "60px",
+                    textAlign: "end",
+                    width: "70px",
                     fontWeight: "bold",
                   }}
                 >
@@ -148,12 +180,13 @@ const Cart = () => {
                 <Box
                   key={index}
                   data-product-id={item._id}
-                  data-product-stock={1}
+                  data-product-quantity={cartLocalStorage[index].quantity}
+                  data-product-type={cartLocalStorage[index].type}
                   component="li"
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    py: 1,
+                    py: 1.5,
                     borderBottom: "1px solid lightgray",
                   }}
                 >
@@ -168,6 +201,7 @@ const Cart = () => {
                       width: "120px",
                       height: "auto",
                       mr: 4,
+                      borderRadius: "5px",
                     }}
                   />
                   <Typography
@@ -185,7 +219,9 @@ const Cart = () => {
                       width: "60px",
                       mr: 3,
                     }}
-                  >{`$${item.price}`}</Typography>
+                  >{`$${
+                    item.price + cartLocalStorage[index].type
+                  }`}</Typography>
                   <Typography
                     component="p"
                     sx={{
@@ -202,9 +238,13 @@ const Cart = () => {
                       mr: 3,
                     }}
                   >
-                    {`$${item.price * cartLocalStorage[index].quantity}`}
+                    {`$${
+                      (item.price + cartLocalStorage[index].type) *
+                      cartLocalStorage[index].quantity
+                    }`}
                   </Typography>
                   <DeleteForeverIcon
+                    onClick={handleDelete}
                     sx={{
                       fontSize: "26px",
                       color: "#af6408",
@@ -221,7 +261,7 @@ const Cart = () => {
                 sx={{
                   maxHeight: "50px",
                   backgroundColor: "whitesmoke",
-                  border: "1px solid lightgrey",
+                  border: "1px solid lightgray",
                   color: "black",
                   px: 3,
                   mt: 2,
@@ -246,7 +286,8 @@ const Cart = () => {
                 component="p"
                 sx={{
                   fontWeight: "bold",
-                  backgroundColor: "lightgrey",
+                  backgroundColor: "#393939",
+                  color: "whitesmoke",
                   px: 2,
                   py: 1,
                 }}
@@ -260,8 +301,8 @@ const Cart = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  border: "1px solid grey",
-                  height: "150px",
+                  border: "1px solid lightgray",
+                  height: "170px",
                   p: 2,
                 }}
               >
@@ -270,14 +311,13 @@ const Cart = () => {
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
-                    borderBottom: "1px solid lightblue",
                     pb: 1,
                   }}
                 >
                   <Typography
                     component="span"
                     sx={{
-                      fontWeight: "bold",
+                      fontSize: "14px",
                     }}
                   >
                     Subtotal
@@ -288,7 +328,34 @@ const Cart = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    $200,40
+                    {`$${subtotal}`}
+                  </Typography>
+                </Typography>
+                {/* delivery */}
+                <Typography
+                  component="p"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    borderBottom: "1px solid lightgray",
+                    pb: 1,
+                  }}
+                >
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontSize: "14px",
+                    }}
+                  >
+                    Delivery (Free from $40)
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {`$${deliveryTax}`}
                   </Typography>
                 </Typography>
                 <Typography
@@ -296,6 +363,7 @@ const Cart = () => {
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
+                    py: 1,
                   }}
                 >
                   <Typography
@@ -312,7 +380,7 @@ const Cart = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    $200,40
+                    {`$${subtotal + deliveryTax}`}
                   </Typography>
                 </Typography>
                 <Button

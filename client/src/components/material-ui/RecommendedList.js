@@ -42,6 +42,7 @@ const RecommendedList = ({ recommendedProductsArr }) => {
           }}
         >
           <CardActionArea
+            href={`/menu/${item._id}`}
             sx={{
               filter: "brightness(0.75)",
               "&:hover": {
@@ -85,7 +86,7 @@ const RecommendedList = ({ recommendedProductsArr }) => {
               color="#434242"
               fontSize="24px"
             >
-              {item.price}
+              {`$${item.price}`}
             </Typography>
             <Button
               size="medium"

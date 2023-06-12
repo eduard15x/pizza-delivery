@@ -3,6 +3,7 @@ const express = require("express");
 const {
   loginUser,
   signupUser,
+  getUser,
   updateUser,
 } = require("../controllers/usersController");
 // importing the middleware function
@@ -12,8 +13,11 @@ const router = express.Router();
 // login route
 router.post("/login", loginUser);
 
-//signup route
+// signup route
 router.post("/signup", signupUser);
+
+// get user route
+router.get("/:id", getUser);
 
 // require auth for routes
 // router.use(requireAuth);

@@ -40,6 +40,24 @@ const signupUser = async (req, res) => {
   }
 };
 
+// get single user
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ err: "No user found" });
+  }
+
+  const user = await User.findById({ _id: id });
+
+  if (!user) {
+    return res.status(404).json({ err: "No user found" });
+  }
+
+  res.status(200).json(user);
+};
+
 // update user
 const updateUser = async (req, res) => {
   const { id } = req.params;
@@ -65,5 +83,6 @@ const updateUser = async (req, res) => {
 module.exports = {
   loginUser,
   signupUser,
+  getUser,
   updateUser,
 };

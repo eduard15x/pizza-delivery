@@ -3,15 +3,16 @@
 // TODO - update DB
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useCartContext } from "../hooks/useCartContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
 import CardMedia from "@mui/material/CardMedia";
 const getSingleProductURL = process.env.REACT_APP_SINGLE_PRODUCT;
 
 const Cart = () => {
+  const { deleteFromCart } = useCartContext();
   const [cartProductsList, setCartProductsList] = useState([]);
   const [deliveryTax, setDeliveryTax] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
@@ -60,10 +61,13 @@ const Cart = () => {
       (item) => item.product === productId && item.type === productType
     );
     cartLocalStorage.splice(indexToRemove, 1);
+    cartProductsList.splice(indexToRemove, 1);
     // update local storage to store new array
     localStorage.setItem("cart", JSON.stringify(cartLocalStorage));
     // update UI
-    getCartProducts();
+    deleteFromCart(cartLocalStorage[indexToRemove]);
+    setCartProductsList(cartProductsList);
+    // // getCartProducts();
   };
 
   useEffect(() => {

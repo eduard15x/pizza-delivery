@@ -1,5 +1,4 @@
-// TODO - create global state for cart length products icon in navbar
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,6 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
+import { useCartContext } from "../../hooks/useCartContext";
 
 const pages = [
   {
@@ -40,10 +40,9 @@ const pages = [
 const settings = ["Account", "Logout"];
 
 const NavBar = () => {
+  const { state, clearCart } = useCartContext();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const length = JSON.parse(localStorage.getItem("cart")).length;
-  const [it, setIt] = useState(length);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,7 +63,10 @@ const NavBar = () => {
   const { user } = useAuthenticationContext();
   console.log(user);
 
-  const handleLogout = () => logout();
+  const handleLogout = () => {
+    logout();
+    clearCart();
+  };
 
   return (
     <AppBar
@@ -277,7 +279,7 @@ const NavBar = () => {
                 justifyContent: "center",
               }}
             >
-              {it}
+              {state.length}
             </Typography>
           </Box>
         </Toolbar>

@@ -69,7 +69,10 @@ const Router = () => {
               path="/login"
               element={!user ? <LogIn /> : <Navigate to="/" />}
             />
-            <Route path="/menu/:id" element={<SingleProduct />} />
+            <Route
+              path="/menu/:id"
+              element={user ? <SingleProduct /> : <Navigate to="/login" />}
+            />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />

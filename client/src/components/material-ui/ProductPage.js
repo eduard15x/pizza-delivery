@@ -1,6 +1,7 @@
 // TODO - after added product to localStorage, update the database stock
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useCartContext } from "../../hooks/useCartContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,6 +15,7 @@ import ProductRating from "./ProductRating";
 const SINGLE_PRODUCT = process.env.REACT_APP_DELETE_PRODUCT;
 
 const ProductPage = () => {
+  const { addToCart } = useCartContext();
   const [productDetails, setProductDetails] = useState(null);
 
   const productIngredients = productDetails?.description.split(",");
@@ -25,14 +27,16 @@ const ProductPage = () => {
     setPizzaType(event.target.value);
   };
   const productID = window.location.pathname.split("/").pop();
-  console.log(productDetails?.productType);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
     const cart = JSON.parse(localStorage.getItem("cart"));
     const newItem = {
       product: productID,
       type: pizzaType,
       quantity: 1,
+      unique: productID + pizzaType,
     };
 
     if (cart) {
@@ -50,10 +54,12 @@ const ProductPage = () => {
         // If no existing item is found, add the new item to the cart
         const updatedCart = [...cart, newItem];
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+        addToCart(newItem);
       }
     } else {
       // If the cart is empty, add the new item to the cart
       localStorage.setItem("cart", JSON.stringify([newItem]));
+      addToCart(newItem);
     }
   };
 

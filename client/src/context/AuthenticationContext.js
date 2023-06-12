@@ -19,8 +19,9 @@ export const authReducer = (state, action) => {
 // create custom component
 // the 'children' means all of this component will wrap
 export const AuthenticationContextProvider = ({ children }) => {
+  const userLocalStorage = JSON.parse(localStorage.getItem("user"));
   const [state, dispatch] = useReducer(authReducer, {
-    user: null,
+    user: userLocalStorage,
   });
 
   useEffect(() => {

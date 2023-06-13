@@ -42,14 +42,9 @@ const signupUser = async (req, res) => {
 
 // get single user
 const getUser = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
+  const { email } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ err: "No user found" });
-  }
-
-  const user = await User.findById({ _id: id });
+  const user = await User.findOne({ email });
 
   if (!user) {
     return res.status(404).json({ err: "No user found" });
@@ -60,14 +55,10 @@ const getUser = async (req, res) => {
 
 // update user
 const updateUser = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ err: "No user found" });
-  }
+  const { email } = req.params;
 
   const user = await User.findOneAndUpdate(
-    { _id: id },
+    { email },
     {
       ...req.body, // it includes also the other properties that are not modifies here, else will delete the old ones
     }

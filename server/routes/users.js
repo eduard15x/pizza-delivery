@@ -17,10 +17,10 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 // get user route
-router.get("/:id", getUser);
+router.get("/:email", getUser);
 
 // require auth for routes
 // router.use(requireAuth);
-router.patch("/orders/:id", updateUser);
+router.patch("/orders/:email", updateUser);
 
 module.exports = router;

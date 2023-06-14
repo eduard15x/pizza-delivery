@@ -1,6 +1,6 @@
 // TODO - Responsive design
-// TODO - submit payment
-// TODO - update DB
+// TODO - update DB - for the new collection "orders"
+// TODO - split code and components
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useCartContext } from "../hooks/useCartContext";
@@ -10,9 +10,11 @@ import Button from "@mui/material/Button";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CardMedia from "@mui/material/CardMedia";
 const getSingleProductURL = process.env.REACT_APP_SINGLE_PRODUCT;
+const getSingleUserURL = process.env.REACT_APP_SINGLE_USER;
+const updateUserURL = process.env.REACT_APP_UPDATE_USER;
 
 const Cart = () => {
-  const { deleteFromCart } = useCartContext();
+  const { deleteFromCart, clearCart } = useCartContext();
   const [cartProductsList, setCartProductsList] = useState([]);
   const [deliveryTax, setDeliveryTax] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
@@ -52,6 +54,7 @@ const Cart = () => {
     }
   }
 
+  // delete btn
   const handleDelete = (e) => {
     const parentEl = e.currentTarget.parentElement;
     const productId = parentEl.dataset.productId;
@@ -60,14 +63,47 @@ const Cart = () => {
     const indexToRemove = cartLocalStorage.findIndex(
       (item) => item.product === productId && item.type === productType
     );
+    deleteFromCart(cartLocalStorage[indexToRemove]);
     cartLocalStorage.splice(indexToRemove, 1);
     cartProductsList.splice(indexToRemove, 1);
     // update local storage to store new array
     localStorage.setItem("cart", JSON.stringify(cartLocalStorage));
     // update UI
-    deleteFromCart(cartLocalStorage[indexToRemove]);
-    setCartProductsList(cartProductsList);
-    // // getCartProducts();
+    getCartProducts();
+  };
+
+  // packet with handleSubmit
+  const updateUserCartOnSubmit = (prevData, user) => {
+    axios
+      .patch(updateUserURL + user, {
+        userOrders: [...prevData, cartLocalStorage],
+      })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          localStorage.removeItem("cart");
+          clearCart();
+          getCartProducts();
+          console.log("Request successful");
+        } else {
+          console.log("Request failed");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = (e) => {
+    console.log(e.target);
+    console.log(userLocalStorage);
+
+    axios
+      .get(getSingleUserURL + userLocalStorage.email)
+      .then((response) => {
+        updateUserCartOnSubmit(
+          response.data.userOrders,
+          userLocalStorage.email
+        );
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -388,6 +424,7 @@ const Cart = () => {
                   </Typography>
                 </Typography>
                 <Button
+                  onClick={handleSubmit}
                   sx={{
                     maxHeight: "50px",
                     backgroundColor: "#af6408",

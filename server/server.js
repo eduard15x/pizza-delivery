@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 // routes import
 const productsRoutes = require("./routes/products");
 const usersRoutes = require("./routes/users");
+const ordersRoutes = require("./routes/orders");
 
 // create express app
 const app = express();
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 // routes
 app.use("/menu", productsRoutes);
 app.use("/users", usersRoutes);
+app.use("/orders", ordersRoutes);
 
 // connection to mongodb
 mongoose

@@ -60,8 +60,9 @@ const updateUser = async (req, res) => {
   const user = await User.findOneAndUpdate(
     { email },
     {
-      ...req.body, // it includes also the other properties that are not modifies here, else will delete the old ones
-    }
+      $push: { userOrders: req.body.userOrders },
+    },
+    { new: true }
   );
 
   if (!user) {

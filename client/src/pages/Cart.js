@@ -73,10 +73,10 @@ const Cart = () => {
   };
 
   // packet with handleSubmit
-  const updateUserCartOnSubmit = (prevData, user) => {
+  const updateUserCartOnSubmit = (data, user) => {
     axios
       .patch(updateUserURL + user, {
-        userOrders: [...prevData, cartLocalStorage],
+        userOrders: data,
       })
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
@@ -92,16 +92,14 @@ const Cart = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(e.target);
-    console.log(userLocalStorage);
-
     axios
       .get(getSingleUserURL + userLocalStorage.email)
       .then((response) => {
-        updateUserCartOnSubmit(
-          response.data.userOrders,
-          userLocalStorage.email
-        );
+        const userOrder = cartLocalStorage.map((item, index) => ({
+          ...item,
+          name: cartProductsList[index].name,
+        }));
+        updateUserCartOnSubmit(userOrder, userLocalStorage.email);
       })
       .catch((err) => console.log(err));
   };

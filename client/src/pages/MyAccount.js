@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 // child components
+import MyAccountGeneral from "../components/material-ui/MyAccountGeneral";
 import MyAccountOrders from "../components/material-ui/MyAccountOrders";
+import MyAccountSettings from "../components/material-ui/MyAccountSettings";
 const singleUserURL = process.env.REACT_APP_SINGLE_USER;
 
 const MyAccount = () => {
@@ -11,6 +14,9 @@ const MyAccount = () => {
   const accountTabsList = ["general", "orders", "settings"];
   const [currentItem, setCurrentItem] = useState(accountTabsList[0]);
   const [userData, setUserData] = useState(null);
+  const [responseStatus, setResponseStatus] = useState(false);
+  const [error, setError] = useState('');
+
   const handleTabChange = (tab) => {
     setCurrentItem(tab);
   };
@@ -21,7 +27,10 @@ const MyAccount = () => {
       .then((response) => {
         setUserData(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setError(err.response.data.err)
+        setResponseStatus(true)
+      });
   };
 
   useEffect(() => {
@@ -80,15 +89,38 @@ const MyAccount = () => {
         ))}
       </Box>
       {/* Specific component for current tab */}
-      {currentItem === "general" ? (
-        <p>General</p>
-      ) : currentItem === "orders" ? (
-        <MyAccountOrders userData={userData} />
-      ) : (
-        <div>
-          <p>Settings</p>
-        </div>
-      )}
+      {
+        userData !== null ? (
+          <>
+            {
+              userData !== null && currentItem === "general" ? (
+                <MyAccountGeneral userData={userData} />
+              ) : userData !== null && currentItem === "orders" ? (
+                <MyAccountOrders userData={userData} />
+              ) : (
+                <MyAccountSettings userData={userData} />
+              )
+            }
+          </>
+        ) : (
+          <>
+            {
+              responseStatus === false ? (
+                <CircularProgress
+                  sx={{
+                    display: "flex",
+                    margin: "auto",
+                  }}
+                />
+              ) : (
+                <Typography component="p" sx={{mt: 2, fontSize: {md: "18px", lg: "22px" }}}>
+                  {error}
+                </Typography>
+              )
+            }
+          </>
+        )
+      }
     </Box>
   );
 };

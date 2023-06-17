@@ -19,8 +19,6 @@ import Contact from "../pages/Contact";
 import AboutUs from "../pages/AboutUs";
 import Cart from "../pages/Cart";
 import MyAccount from "../pages/MyAccount";
-import Test from "../pages/test";
-import Dash from "../components/Dash";
 import NavBar from "./NavBar";
 import AdminSideNavigation from "./admin/AdminSideNavigation";
 import AdminOffers from "./admin/AdminOffers";
@@ -78,7 +76,7 @@ const Router = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/my-account" element={<MyAccount />} />
           </Route>
-
+          {/* Admin routes and pages */}
           <Route path="/admin" element={<LayoutAdminPanel />}>
             <Route path="" element={<AdminPanel />} />
             <Route path="dashboard" element={<AdminDashboard />} />

@@ -1,18 +1,10 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { convertDate } from "../../utils/convertDate";
 
 const MyAccountOrders = ({ userData }) => {
   const userOrdersList = userData.userOrders;
-  // convertDate to format YEAR-MM-DD
-  const convertDate = (date) => {
-    const createDate = new Date(date);
-    const convertedDate =
-    `
-      ${createDate.getFullYear()}-${createDate.getMonth() + 1 < 10 ?  '0' + (createDate.getMonth() + 1)   : createDate.getMonth() + 1 }-${createDate.getDate()}
-    `;
-    return convertedDate;
-  };
 
   return (
     <>

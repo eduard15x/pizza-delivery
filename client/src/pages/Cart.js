@@ -1,5 +1,4 @@
 // TODO - Responsive design
-// TODO - update DB - for the new collection "orders"
 // TODO - split code and components
 import { useState, useEffect } from "react";
 import axios from "axios";

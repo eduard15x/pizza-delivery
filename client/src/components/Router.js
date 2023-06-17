@@ -74,7 +74,10 @@ const Router = () => {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/my-account" element={<MyAccount />} />
+            <Route
+              path="/my-account"
+              element={user ? <MyAccount /> : <Navigate to="/login" />}
+            />
           </Route>
           {/* Admin routes and pages */}
           <Route path="/admin" element={<LayoutAdminPanel />}>

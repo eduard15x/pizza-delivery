@@ -10,7 +10,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CardMedia from "@mui/material/CardMedia";
 const getSingleProductURL = process.env.REACT_APP_SINGLE_PRODUCT;
 const getSingleUserURL = process.env.REACT_APP_SINGLE_USER;
-const updateUserURL = process.env.REACT_APP_UPDATE_USER;
+const updateUserOrdersURL = process.env.REACT_APP_UPDATE_USER_ORDERS;
 
 const Cart = () => {
   const { deleteFromCart, clearCart } = useCartContext();
@@ -74,7 +74,7 @@ const Cart = () => {
   // packet with handleSubmit
   const updateUserCartOnSubmit = (data, user) => {
     axios
-      .patch(updateUserURL + user, {
+      .patch(updateUserOrdersURL + user, {
         userOrders: data,
       })
       .then((response) => {

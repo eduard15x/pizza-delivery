@@ -4,7 +4,8 @@ const {
   loginUser,
   signupUser,
   getUser,
-  updateUser,
+  updateUserOrders,
+  updateUserData
 } = require("../controllers/usersController");
 // importing the middleware function
 const requireAuth = require("../middleware/requireAuth");
@@ -21,6 +22,11 @@ router.get("/:email", getUser);
 
 // require auth for routes
 // router.use(requireAuth);
-router.patch("/orders/:email", updateUser);
+
+// update user orders
+router.patch("/orders/:email", updateUserOrders);
+
+// update user data
+router.patch("/data/:id", updateUserData);
 
 module.exports = router;

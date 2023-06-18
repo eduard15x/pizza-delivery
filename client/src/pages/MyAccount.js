@@ -1,3 +1,5 @@
+// TODO - split code
+// TODO - create form for user information update in account settings
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
@@ -15,7 +17,7 @@ const MyAccount = () => {
   const [currentItem, setCurrentItem] = useState(accountTabsList[0]);
   const [userData, setUserData] = useState(null);
   const [responseStatus, setResponseStatus] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleTabChange = (tab) => {
     setCurrentItem(tab);
@@ -28,8 +30,9 @@ const MyAccount = () => {
         setUserData(response.data);
       })
       .catch((err) => {
-        setError(err.response.data.err)
-        setResponseStatus(true)
+        console.log(err);
+        setError(err.response.data.err);
+        setResponseStatus(true);
       });
   };
 
@@ -89,38 +92,35 @@ const MyAccount = () => {
         ))}
       </Box>
       {/* Specific component for current tab */}
-      {
-        userData !== null ? (
-          <>
-            {
-              userData !== null && currentItem === "general" ? (
-                <MyAccountGeneral userData={userData} />
-              ) : userData !== null && currentItem === "orders" ? (
-                <MyAccountOrders userData={userData} />
-              ) : (
-                <MyAccountSettings userData={userData} />
-              )
-            }
-          </>
-        ) : (
-          <>
-            {
-              responseStatus === false ? (
-                <CircularProgress
-                  sx={{
-                    display: "flex",
-                    margin: "auto",
-                  }}
-                />
-              ) : (
-                <Typography component="p" sx={{mt: 2, fontSize: {md: "18px", lg: "22px" }}}>
-                  {error}
-                </Typography>
-              )
-            }
-          </>
-        )
-      }
+      {userData !== null ? (
+        <>
+          {userData !== null && currentItem === "general" ? (
+            <MyAccountGeneral userData={userData} />
+          ) : userData !== null && currentItem === "orders" ? (
+            <MyAccountOrders userData={userData} />
+          ) : (
+            <MyAccountSettings userData={userData} />
+          )}
+        </>
+      ) : (
+        <>
+          {responseStatus === false ? (
+            <CircularProgress
+              sx={{
+                display: "flex",
+                margin: "auto",
+              }}
+            />
+          ) : (
+            <Typography
+              component="p"
+              sx={{ mt: 2, fontSize: { md: "18px", lg: "22px" } }}
+            >
+              {error}
+            </Typography>
+          )}
+        </>
+      )}
     </Box>
   );
 };

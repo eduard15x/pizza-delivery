@@ -38,7 +38,7 @@ const MyAccount = () => {
 
   useEffect(() => {
     getUserData(userLocalStorage.email);
-  }, []);
+  }, [userLocalStorage.email]);
 
   return (
     <Box

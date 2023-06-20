@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,27 +17,26 @@ import { useLogout } from "../../hooks/useLogout";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 import { useCartContext } from "../../hooks/useCartContext";
 
-const pages = [
-  {
-    itemName: "Home",
-    href: "/",
-  },
-  {
-    itemName: "Menu",
-    href: "/menu",
-  },
-  {
-    itemName: "About us",
-    href: "/about-us",
-  },
-  {
-    itemName: "Contact",
-    href: "/contact",
-  },
-];
-const settings = ["Account", "Logout"];
-
 const NavBar = () => {
+  const pages = [
+    {
+      itemName: "Home",
+      href: "/",
+    },
+    {
+      itemName: "Menu",
+      href: "/menu",
+    },
+    {
+      itemName: "About us",
+      href: "/about-us",
+    },
+    {
+      itemName: "Contact",
+      href: "/contact",
+    },
+  ];
+  const settings = ["Account", "Logout"];
   const { state, clearCart } = useCartContext();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

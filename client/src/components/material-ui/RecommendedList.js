@@ -15,7 +15,7 @@ const RecommendedList = ({ recommendedProductsArr }) => {
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        pt: 12,
+        pt: { xs: 8, md: 12 },
       }}
     >
       <Typography
